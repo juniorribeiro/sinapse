@@ -6,6 +6,7 @@ use App\Faster;
 use App\Http\Controllers\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 
 class fastersController extends Controller {
 	/**
@@ -13,10 +14,16 @@ class fastersController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function index() {
+	public function index()
+	{
+		# passa o nome do cabloco !!!!
+		$name 	 = (Session::get('name')) ? Session::get('name') : false;
 		$fasters = Faster::paginate(15);
 
-		return view('fasters.index', compact('fasters'));
+		return view('fasters.index', compact(
+				'fasters',
+				'name'
+			));
 	}
 
 	/**
@@ -24,7 +31,8 @@ class fastersController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function create() {
+	public function create()
+	{
 		return view('fasters.create');
 	}
 
@@ -33,9 +41,13 @@ class fastersController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function store(Request $request) {
-
-		Faster::create($request->all());
+	public function store(Request $request)
+	{
+		# Grava o nome do user na sessão.
+		Session::put('name', $request->get('name'));
+		# Verifica se ja existe alguem la.
+		if (!Faster::first())
+			Faster::create($request->all());
 
 		//Session::flash('flash_message', 'Faster added!');
 

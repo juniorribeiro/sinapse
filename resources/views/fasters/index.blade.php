@@ -28,7 +28,7 @@
                 <label for="task" class="col-sm-3 control-label">Nome:</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="name" id="user-name" class="form-control">
+                    <input type="text" name="name" id="user-name" class="form-control" value="{{ $name }}">
                 </div>
             </div>
 
