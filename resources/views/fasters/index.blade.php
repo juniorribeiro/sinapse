@@ -11,7 +11,7 @@
             @forelse($fasters as $item)
                 {{-- */$x++;/* --}}
 
-                <h3>{{ $item->name }}</h3></b> foi mais ágil que você ;)
+                <h3>{{ $item->name }}</h3></b> conquistou direito de resposta ;)
                 <meta http-equiv="refresh" content="2">
 
                 @empty
